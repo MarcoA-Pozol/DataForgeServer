@@ -65,10 +65,12 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'Authentication.middlewares.UserLanguageMiddleware',
 ]
 
 ROOT_URLCONF = 'DataForge.urls'
@@ -130,6 +132,22 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 LANGUAGE_CODE = 'en-us'
+
+LANGUAGES = [
+    ('en', 'English'),
+    ('fr', 'French'),
+    ('es', 'Spanish'),
+    ('pt', 'Portuguese'), # Add more if needed
+    ('it', 'Italian'),
+    ('jp', 'Japanese'),
+    ('cn', 'Chinese'),
+    ('ru', 'Russian'),
+    ('ge', 'German'),
+]
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',  # Ensure your translation files are in the "locale" folder
+]
 
 TIME_ZONE = 'UTC'
 

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load i18n %}
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataForge - Session</title>
+
+    <link rel="icon" type="image/x-icon" href="{% static 'icons/favicon.ico' %}">
+
+    <link rel="stylesheet" href="{% static 'css/authentication.css' %}">
+</head>
+<body>
+    <h1>{% trans "Jesus is my fortress, he will never forget me" %}</h1>
+    <p>{% trans "This is a text" %}</p>
+    <p>Current language: {{ request.LANGUAGE_CODE }}</p>
+
+    <form class="register-form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>{% trans "Create Your Account" %}</h2>
+
+        {{ register_form.username.label_tag }}
+        {{ register_form.username }}
+
+        {{ register_form.email.label_tag }}
+        {{ register_form.email }}
+
+        {{ register_form.password.label_tag }}
+        {{ register_form.password }}
+
+        {{ register_form.country.label_tag }}
+        {{ register_form.country }}
+
+        {{ register_form.profile_picture.label_tag }}
+        {{ register_form.profile_picture }}
+
+        <button type="submit">Register</button>
+    </form>
+
+    <h6>{% trans "This is another text that must be translated." %}</h6>
+</body>
+</html>

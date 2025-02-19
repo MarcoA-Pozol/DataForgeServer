@@ -1,0 +1,53 @@
+# bash
+# Create translation files using command lines into project directory.
+django-admin makemessages -l es  # For Spanish
+django-admin makemessages -l pt  # For Portuguese
+django-admin makemessages -l fr  # For French
+
+# django_project_root/local/
+# The previous process will generate .po files in locale directory of the Django project.
+local/es/LC_MESSAGES/django.po
+local/pt/LC_MESSAGES/django.po
+local/fr/LC_MESSAGES/django.po
+
+# local/*every_language/LC_MESSAGES/django.po
+# Translate every string in every .po file.
+#: templates/home.html:10
+msgid "Welcome to our website!"
+msgstr "¡Bienvenido a nuestro sitio web!"
+#: templates/home.html:12
+msgid "Please log in to continue."
+msgstr "Por favor, inicie sesión para continuar."
+#: templates/home.html:14
+msgid "Submit"
+msgstr "Enviar"
+# msgid: The original string (in English).
+# msgstr: The translated string (in the target language).
+
+# bash
+# Compile the translation files from .po into .mo files which Django uses to serve the translations.
+django-admin compilemessages
+
+
+# Authentication.views
+# Allow users to change their language.
+from django.shortcuts import redirect
+from django.utils import tranlation
+
+def set_language(request, language_code)
+    user = [request.user if request.user.is_authenticated else None]
+    if user:
+        user.language = language_code
+        user.save()
+        translation.activate(language_code)
+        request.session[translation.LANGUAGE_SESSION_KEY] = language_code
+        return redirect('home')
+        
+# Authentication.urls
+# Add an URL pattern for the view of language selection.
+from django.urls import path
+from . views import *
+
+urlpatterns = [
+    path('set_language/<str:language_code>/', views.set_language, name="set_language"),
+]
