@@ -1,0 +1,44 @@
+.hidden-container{
+    display: none;   
+}
+
+.login-form{
+    background-color: rgb(190, 120, 90);
+    color: white;
+    font-family: sans-serif;
+    text-align: center;
+    justify-content: center;
+    justify-self: center;
+    margin: auto;
+    border-radius: 5px;
+    padding: 10px;
+    display: block;
+    align-content: center;
+    align-items: center;
+    justify-items: center;
+}
+
+.register-form{
+    background-color: rgb(90, 120, 190);
+    color: white;
+    font-family: sans-serif;
+    text-align: center;
+    justify-content: center;
+    justify-self: center;
+    margin: auto;
+    border-radius: 5px;
+    padding: 10px;
+    display: block;
+    align-content: center;
+    align-items: center;
+    justify-items: center;
+}
+
+#button-display-login{
+    cursor: pointer;
+    border: 1px solid rosybrown;
+}
+#button-display-register{
+    cursor: pointer;
+    border: 1px solid royalblue;
+}

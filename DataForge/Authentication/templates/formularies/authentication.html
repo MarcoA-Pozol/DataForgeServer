@@ -8,17 +8,31 @@
     <title>DataForge - Session</title>
 
     <link rel="icon" type="image/x-icon" href="{% static 'icons/favicon.ico' %}">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"> <!--Extension for icons in templates-->
     <link rel="stylesheet" href="{% static 'css/authentication.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!--JQuery Library-->
+    <script src="{% static 'js/authentication.js' %}"></script>
 </head>
 <body>
-    <h1>{% trans "Jesus is my fortress, he will never forget me" %}</h1>
-    <p>{% trans "This is a text" %}</p>
-    <p>Current language: {{ request.LANGUAGE_CODE }}</p>
+    
 
-    <form class="register-form" method="post" enctype="multipart/form-data">
+    <form id="login-form" class="login-form" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <h2>{% trans "Create Your Account" %}</h2>
+        <h2>{% trans "Sign-In" %}</h2>
+        
+        {{ login_form.username.label_tag }}
+        {{ login_form.username }}
+
+        {{ login_form.password.label_tag }}
+        {{ login_form.password }}
+
+        <button class="submit-button" type="submit">Submit</button>
+        <span id="button-display-register">I do not have an account yet.</span>
+    </form>
+
+    <form id="register-form" class="hidden-container" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>{% trans "Register" %}</h2>
 
         {{ register_form.username.label_tag }}
         {{ register_form.username }}
@@ -35,9 +49,8 @@
         {{ register_form.profile_picture.label_tag }}
         {{ register_form.profile_picture }}
 
-        <button type="submit">Register</button>
+        <button class="submit-button" type="submit">Submit</button>
+        <span id="button-display-login">I alreary have an account.</span>
     </form>
-
-    <h6>{% trans "This is another text that must be translated." %}</h6>
 </body>
 </html>
