@@ -3,4 +3,5 @@ from . import views
 
 urlpatterns = [
     path('', views.app_home, name='app-home'),
+    path('import_export_data/', views.import_export_data, name='import-export-data'),
 ]

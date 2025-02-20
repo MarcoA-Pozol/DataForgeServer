@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
 {% load i18n %}
 {% load static %}
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,11 +9,16 @@
 
     <link rel="icon" type="image/x-icon" href="{% static 'icons/favicon.ico' %}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"> <!--Extension for icons in templates-->
-    <link rel="stylesheet" href="{% static 'css/authentication.css' %}">
+    <!--link rel="stylesheet" href="{% static 'css/authentication.css' %}"-->
+	<link rel="stylesheet" href="C:/Users/Worker/Desktop/M/Coding/Projects/DataForge/DataForge/Authentication/static/css/authentication.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!--JQuery Library-->
-    <script src="{% static 'js/authentication.js' %}"></script>
+    <!--script src="{% static 'js/authentication.js' %}"></script-->
+	<script src="C:/Users/Worker/Desktop/M/Coding/Projects/DataForge/DataForge/Authentication/static/js/authentication.js">
 </head>
 <body>
+	<div id="test-div">
+		<h2 id="test-tag">This is a test text.</h2>
+	</div>
     
 
     <form id="login-form" class="login-form" method="post" enctype="multipart/form-data">
@@ -52,5 +57,6 @@
         <button class="submit-button" type="submit">Submit</button>
         <span id="button-display-login">I alreary have an account.</span>
     </form>
+	
 </body>
 </html>
