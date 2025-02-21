@@ -1,0 +1,40 @@
+1. Install Jenkins
+First, install Jenkins on your server (Ubuntu example):
+
+sudo apt update
+sudo apt install openjdk-11-jdk
+wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
+sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+sudo apt update
+sudo apt install jenkins
+sudo systemctl start jenkins
+
+
+Then, access Jenkins at http://your_server_ip:8080.
+
+2. Install Required Jenkins Plugins
+Go to Manage Jenkins → Plugins and install:
+
+Git Plugin (for pulling your Django repo)
+Pipeline Plugin (for writing pipelines)
+SSH Pipeline Steps (for remote deployment)
+Docker Plugin (if using Docker)
+
+3. Create Jenkinsfile
+
+4. Configure Webhook for Automated Builds
+Set up a GitHub webhook to trigger Jenkins on new commits.
+
+Go to GitHub Repo → Settings → Webhooks and add:
+http://your-jenkins-server/github-webhook/
+
+In Jenkins, enable "Build when a change is pushed to GitHub".
+
+
+Conclusion
+This setup ensures that:
+
+Jenkins pulls the latest Django code.
+Creates a virtual environment and installs dependencies.
+Runs tests automatically.
+Deploys to the server via SSH or Docker.
