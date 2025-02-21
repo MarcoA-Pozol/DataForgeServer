@@ -6,21 +6,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DataForge - App</title>
-  <!--link rel="stylesheet" href="{% static 'css/app_base.css' %}"-->
-  <link rel="stylesheet" href="C:Users/Worker/Desktop/M/Coding/Projects/DataForge/DataForge/Application/static/css/app_base.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"> <!--Extension for icons in templates-->
+  <link rel="stylesheet" href="{% static 'css/app_base.css' %}">
+  <!--link rel="stylesheet" href="C:Users/Worker/Desktop/M/Coding/Projects/DataForge/DataForge/Application/static/css/app_base.css"-->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!--JQuery Library-->
+  <!--script src="{% static 'js/app_base.js' %}"></script-->
+  <!--script src="C:Users/Worker/Desktop/M/Coding/Projects/DataForge/DataForge/Application/static/js/app_base.js"></script-->
 </head>
 <body>
   <header class="header">
     <div class="container">
       <h1 class="logo">DataForge</h1>
       <nav class="nav">
-        <ul>
+        <ul class="top-nav-bar-first-section">
           <li><a href="{% url 'app-home' %}" class="nav-link">{% trans "Home" %}</a></li>
           <li><a href="{% url 'import-export-data' %}" class="nav-link">{% trans "Import and Export" %}</a></li>
           <li><a href="#" class="nav-link">{% trans "Data Visualization" %}</a></li>
           <li><a href="#" class="nav-link">{% trans "Settings" %}</a></li>
-          <li><a href="{% url 'authentication' %}" class="nav-link">{% trans "Session" %}</a></li>
         </ul>
+        
+          <div class="profile_container">
+            <a href="{% url 'logout' %}">
+              {% if request.user.profile_picture %}
+                  <img src="{{ request.user.profile_picture.url }}" alt="{{ request.user.username }}">  
+              {% else %}
+                  <img src="{% static 'img/default_profile_picture.jpg' %}" alt="Default profile picture">
+              {% endif %}
+            </a>
+          </div>
       </nav>
     </div>
   </header>
@@ -34,8 +47,5 @@
       <p>{% trans "2023 DataForge. All rights reserved." %}</p>
     </div>
   </footer>
-
-  <!--script src="{% static 'js/app_base.js' %}"></script-->
-  <!--script src="C:Users/Worker/Desktop/M/Coding/Projects/DataForge/DataForge/Application/static/js/app_base.js"></script-->
 </body>
 </html>

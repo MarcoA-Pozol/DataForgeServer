@@ -1,25 +1,12 @@
+<!DOCTYPE html>
 {% extends 'layouts/app_base.html' %}
 {% block content %}
-	<!--link rel="stylesheet" href="{% static 'css/app_home.css' %}"-->
-	<link rel="stylesheet" href="C:/Users/Worker/Desktop/M/Coding/Projects/DataForge/DataForge/Application/static/css/app_home.css">
-	<!--script src="{% static 'js/app_home.js' %}"></script-->
-	<script src="C:/Users/Worker/Desktop/M/Coding/Projects/DataForge/DataForge/Application/static/js/app_home.js"></script>
-	
-
-	<header class="header">
-	<div class="container">
-	  <h1 class="logo">DataForge</h1>
-	  <nav class="nav">
-		<ul>
-		  <li><a href="{% url 'authentication' %}" class="nav-link">{% trans "Root" %}</a></li>
-		  <li><a href="{% url 'app-home' %}" class="nav-link active">{% trans "Import and Export" %}</a></li>
-		  <li><a href="#" class="nav-link">{% trans "Data Visualization" %}</a></li>
-		  <li><a href="#" class="nav-link">{% trans "Settings" %}</a></li>
-		  <li><a href="#" class="nav-link">{% trans "Session" %}</a></li>
-		</ul>
-	  </nav>
-	</div>
-	</header>
+	{% load static %}
+	{% load i18n %}
+	<link rel="stylesheet" href="{% static 'css/app_home.css' %}">
+	<!--link rel="stylesheet" href="C:/Users/Worker/Desktop/M/Coding/Projects/DataForge/DataForge/Application/static/css/app_home.css"-->
+	<script src="{% static 'js/app_home.js' %}"></script>
+	<!-- <script-- src="C:/Users/Worker/Desktop/M/Coding/Projects/DataForge/DataForge/Application/static/js/app_home.js"></script-->
 
 	<section class="app-hero">
 	<div class="container">
@@ -86,9 +73,4 @@
 	</div>
 	</section>
 
-	<footer class="footer">
-	<div class="container">
-	  <p>{% trans "2023 DataForge. All rights reserved." %}</p>
-	</div>
-	</footer>
 {% endblock %}

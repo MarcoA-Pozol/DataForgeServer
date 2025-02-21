@@ -2,53 +2,184 @@
     display: none;   
 }
 
-.login-form{
-    background-color: rgb(190, 120, 90);
-    color: white;
-    font-family: sans-serif;
-    text-align: center;
-    justify-content: center;
-    justify-self: center;
-    margin: auto;
-    border-radius: 5px;
-    padding: 10px;
-    display: block;
-    align-content: center;
-    align-items: center;
-    justify-items: center;
+
+/* General */
+body {
+    background: linear-gradient(to right, #5d5477, #8a82d6);
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    padding-top: 0;
+    padding-bottom: 120px;
+    font-family: monospace;
 }
 
-.register-form{
-    background-color: rgb(90, 120, 190);
-    color: white;
-    font-family: sans-serif;
-    text-align: center;
+.authentication-container {
+    display: flex;
     justify-content: center;
-    justify-self: center;
-    margin: auto;
-    border-radius: 5px;
-    padding: 10px;
-    display: block;
-    align-content: center;
     align-items: center;
-    justify-items: center;
+    height: 100vh;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+
+/* Register */
+.register-form {
+    background-color: royalblue;
+    width: 50%;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+.register-form h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #ffffff;
+    font-size: 2.2rem;
+}
+
+.register-form label {
+    margin-bottom: 4px;
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 1.2rem;
+}
+
+.register-form input,
+.register-form select {
+    width: 96%;
+    padding: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    transition: box-shadow 0.3s ease;
+    text-align: center;
+    font-family: monospace;
+    font-size: 1.2rem;
+}
+.register-form select {
+    width: 98.5%;
+}
+
+.register-form input:focus,
+.register-form select:focus {
+    box-shadow: 0 0 8px rgba(250, 70, 145, 0.8);
+    outline: none;
+}
+
+.register-form button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #5a46fa;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.register-form button:hover {
+    background: #4834d4;
 }
 
 #button-display-login{
+    text-align: center;
+    width: auto;
+    padding-top: 15px;
+    font-size: 1.2rem;
     cursor: pointer;
-    border: 1px solid rosybrown;
+    transition: text-shadow 1s ease;
+    transition: color 1s ease;
+    color: white;
+    animation: colorChange 2s infinite alternate;
 }
+
+
+
+/* Login */
+.login-form {
+    background-color: rosybrown;
+    width: 50%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+.login-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ffffff;
+    font-size: 2.2rem;
+}
+
+.login-form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 1.2rem;
+}
+
+.login-form input {
+    width: 96%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(250, 70, 181, 0.5);
+    border-radius: 5px;
+    transition: box-shadow 0.3s ease;
+    text-align: center;
+    font-size: 1.2rem;
+    font-family: monospace;
+}
+
+.login-form input:focus {
+    box-shadow: 0 0 8px rgba(90, 70, 250, 0.5);
+    outline: none;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #ad5b75;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.login-form button:hover {
+    background: #da4a75;
+}
+
 #button-display-register{
+    text-align: center;
+    width: auto;
+    padding-top: 15px;
+    font-size: 1.2rem;
     cursor: pointer;
-    border: 1px solid royalblue;
+    transition: text-shadow 1s ease;
+    transition: color 1s ease;
+    color: white;
+    animation: colorChange 2s infinite alternate;
 }
 
-#test-div{
-	background-color: royalblue;
-}
-
-#test-text{
-	font-size: 2.5 rem;
-	color: white;
-	text-shadow: 2px 2px 2px red;
+/* Animations */
+@keyframes colorChange {
+    0%{
+        color: #d9d4fa;
+    }
+    50%{
+        color: #ffc5d7;
+    }
+    100%{
+        color: white;
+    }
 }
