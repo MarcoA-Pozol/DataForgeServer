@@ -18,7 +18,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Security
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY') # SECURITY WARNING: keep the secret key used in production secret!
 
-DEBUG = True # SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = os.getenv('DEBUG', '0').lower() in ['true', '1', 't', 'y', 'yes']
 
 ALLOWED_HOSTS = [
     '.ngrok-free.app',
@@ -105,8 +105,8 @@ DATABASES = {
         'NAME': os.getenv('DB_NAME'),
         'USER': os.getenv('DB_USER'),
         'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT')
+        'HOST': os.getenv('DB_HOST', 'localhost'), # Fallback to 'localhost' if not set
+        'PORT': os.getenv('DB_PORT', '5432'), # Fallback to '5432' if not set
     }
 }
 
@@ -172,4 +172,4 @@ EMAIL_PORT = os.getenv('EMAIL_PORT')
 EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER') 
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-DEFAULT_FROM_EMAIL = 'DataForge'
+DEFAULT_FROM_EMAIL = os.getenv('EMAIL_DEFAULT_FROM', 'DataForge')
