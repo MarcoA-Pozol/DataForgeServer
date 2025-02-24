@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% load i18n %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataForge - Session</title>
+
+    <link rel="icon" type="image/x-icon" href="{% static 'icons/favicon.ico' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"> <!--Extension for icons in templates-->
+    <link rel="stylesheet" href="{% static 'css/authentication.css' %}">
+	<!--link rel="stylesheet" href="C:/Users/Worker/Desktop/M/Coding/Projects/DataForge/DataForge/Authentication/static/css/authentication.css"-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!--JQuery Library-->
+    <script src="{% static 'js/authentication.js' %}"></script>
+	<!--script src="C:/Users/Worker/Desktop/M/Coding/Projects/DataForge/DataForge/Authentication/static/js/authentication.js"></!--script-->
+</head>
+<body>
+	<div class="authentication-container">
+        <form id="register-form" class="hidden-container" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2>{% trans "Sign-Up" %}</h2>
+    
+            {{ register_form.username.label_tag }}
+            {{ register_form.username }}
+    
+            {{ register_form.email.label_tag }}
+            {{ register_form.email }}
+    
+            {{ register_form.password.label_tag }}
+            {{ register_form.password }}
+    
+            {{ register_form.country.label_tag }}
+            {{ register_form.country }}
+    
+            {{ register_form.profile_picture.label_tag }}
+            {{ register_form.profile_picture }}
+            <img id="profile-picture-preview">
+            
+            <button class="submit-button" type="submit">Submit</button>
+            <span id="button-display-login"><i class="fas fa-check-square"></i> I already have an account</span>
+        </form>
+
+    
+        <form id="login-form" class="login-form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2>{% trans "Sign-In" %}</h2>
+            
+            {{ login_form.username.label_tag }}
+            {{ login_form.username }}
+
+            {{ login_form.password.label_tag }}
+            {{ login_form.password }}
+
+            <button class="submit-button" type="submit">Submit</button>
+            <span id="button-display-register"><i class="fas fa-pen-to-square"></i> I do not have an account yet</span>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const fileInput = document.getElementById("id_profile_picture"); // Django assigns IDs dynamically
+            const preview = document.getElementById("profile-picture-preview");
+    
+            if (fileInput) {
+                fileInput.addEventListener("change", function (event) {
+                    const file = event.target.files[0];
+    
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            preview.src = e.target.result;
+                            preview.style.display = "block";
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
