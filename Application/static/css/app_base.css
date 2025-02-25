@@ -64,21 +64,47 @@ body {
   gap: 10px;
 }
 
-.profile_container img {
-  width: 39px;
-  height: 39px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: none;
+#profile-image-name {
+  cursor: pointer;
 }
 
-.profile_container h3 {
-  text-align: center;
-  font-size: 0.6rem;
+.profile_container div {
+  text-decoration: none;
   color: white;
+  margin-inline: 5px;
 }
 
+.profile_container img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 20%;
+  border: none;
+  object-fit: cover;
+  object-position: center;
+}
 
+.profile_container span {
+  text-align: center;
+  font-size: 1.2rem;
+  color: white;
+  text-align: center;
+}
+
+#button-profile {
+  text-decoration: none;
+}
+
+#button-settings{
+  border: 1px solid #333;
+  border-radius: 5px;
+  padding: 6px;
+  background-color: #3498db;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
 
 
 /* Footer */

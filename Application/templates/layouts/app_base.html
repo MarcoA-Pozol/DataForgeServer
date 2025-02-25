@@ -8,10 +8,8 @@
   <title>DataForge - App</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"> <!--Extension for icons in templates-->
   <link rel="stylesheet" href="{% static 'css/app_base.css' %}">
-  <!--link rel="stylesheet" href="C:Users/Worker/Desktop/M/Coding/Projects/DataForge/DataForge/Application/static/css/app_base.css"-->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!--JQuery Library-->
-  <!--script src="{% static 'js/app_base.js' %}"></script-->
-  <!--script src="C:Users/Worker/Desktop/M/Coding/Projects/DataForge/DataForge/Application/static/js/app_base.js"></script-->
+  <script src="{% static 'js/app_base.js' %}"></script>
 </head>
 <body>
   <header class="header">
@@ -25,15 +23,21 @@
           <li><a href="#" class="nav-link">{% trans "Settings" %}</a></li>
         </ul>
         
-          <div class="profile_container">
-            <a href="{% url 'logout' %}">
-              {% if request.user.profile_picture %}
-                  <img src="{{ request.user.profile_picture.url }}" alt="{{ request.user.username }}">  
-              {% else %}
-                  <img src="{% static 'img/default_profile_picture.jpg' %}" alt="Default profile picture">
-              {% endif %}
-            </a>
-          </div>
+        <div class="profile_container">
+          <a id="button-profile" href="{% url 'logout' %}">
+            {% if request.user.profile_picture %}
+                <img src="{{ request.user.profile_picture.url }}" alt="{{ request.user.username }}">  
+            {% else %}
+                <img src="{% static 'img/default_profile_picture.jpg' %}" alt="Default profile picture">
+            {% endif %}
+            {% if request.user.username|length < 18 %}
+              <span>{{ request.user.username }}</span>
+            {% else %}
+              <span>{{ request.user.username|slice:":18" }}...</span> <!--Usernames having more than 18 characters will be "cut" to display them apropiately on the template-->
+            {% endif %}
+            <a href="#" id="button-settings"><i class="fas fa-gears"></i></a>
+          </a>
+        </div>
       </nav>
     </div>
   </header>
