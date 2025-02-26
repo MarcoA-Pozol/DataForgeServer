@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% extends 'layouts/app_base.html' %}
+
+{% block content %}
+    {% load static %}
+    {% load i18n %}
+
+    <!--Styles-->
+    <link rel="stylesheet" href="{% static 'css/app_data_visualization.css' %}">
+
+    <!--Scripts-->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{% static 'js/app_data_visualization.js' %}"></script>
+
+    <!--Content-->
+    <div class="chart-container" width="400" height="200">
+        <h2>{% trans "Visualize your data down below" %}<i class="fas fa-long-arrow-down"></i></h2>
+        <canvas id="data-chart">
+            <!--Provided data will be displayed right here-->
+        </canvas>
+    </div>
+    
+{% endblock %}

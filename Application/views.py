@@ -7,3 +7,6 @@ def app_home(request):
 
 def import_export_data(request):
     return render(request, 'import_export_data.html')
+
+def data_visualization(request):
+    return render(request, 'app_data_visualization.html')

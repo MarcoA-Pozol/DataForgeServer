@@ -1,0 +1,8 @@
+.chart-container{
+    font-family: monospace;
+    margin: 0 auto;
+    width: 80%;
+    text-align: center;
+    background-color: royalblue;
+    color: white;
+}
