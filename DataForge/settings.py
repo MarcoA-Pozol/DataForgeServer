@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     # Project's Apps
     'Application',
-    'Authentication'
+    'Authentication',
 ]
 
 # API and JWT
@@ -70,6 +70,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'Authentication.middlewares.UserLanguageMiddleware',
+    'Application.middlewares.UploadDataValidationMiddleware',
 ]
 
 ROOT_URLCONF = 'DataForge.urls'
