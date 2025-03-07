@@ -1,0 +1,68 @@
+pipeline {
+    agent any
+
+    environment {
+        VENV_DIR = "venv"
+        DOCKER_IMAGE_DB = "dataforge-db"
+        DOCKER_IMAGE_APP = "dataforge-app"
+    }
+
+    stages {
+        stage("Clone Repository") {
+            steps {
+                git branch: 'main', url: 'git@github.com:MarcoA-Pozol/DataForge.git', credentialsId: 'jenkins-ssh-key'
+            }
+        }
+
+        stage("Set Up Environment") {
+            steps {
+                bat "python -m venv ${VENV_DIR}"  // Use "python" instead of "python3" on Windows
+                bat """
+                    call ${VENV_DIR}\\Scripts\\activate && \
+                    pip install --upgrade pip && \
+                    pip install -r requirements.txt
+                """  // Use "call" to activate the virtual environment
+            }
+        }
+
+        stage("Build & Run PostgresDB Docker Image") {
+            steps {
+                bat "docker build -t ${DOCKER_IMAGE_DB} ."
+                bat "docker run -d -p 8001:8001 ${DOCKER_IMAGE_DB}"
+            }
+        }
+
+        stage("Build & Run App Docker Image") {
+            steps {
+                bat "docker build -t ${DOCKER_IMAGE_APP} ."
+                bat "docker run -d -p 8002:8002 ${DOCKER_IMAGE_APP}"
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Pipeline succeeded!"
+        }
+        failure {
+            echo "Pipeline failed!"
+        }
+    }
+}
+
+
+pipeline {
+    agent any 
+
+    environment {
+        VENV_DIR = "venv"
+    }
+
+    stages {
+        stage("Test") {
+            steps {
+                echo "Running the tests"
+            }
+        }
+    }
+}
