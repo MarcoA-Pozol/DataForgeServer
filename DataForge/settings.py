@@ -30,6 +30,10 @@ CSRF_TRUSTED_ORIGINS = [
     'https://*'
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000', # React dev default server
+]
+
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -40,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # REST API Dependencies
     'rest_framework',
+    'corsheaders',
     # Project's Apps
     'Application',
     'Authentication',
@@ -56,11 +61,12 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=20),
-    'REFRESH_TOKEN_LIFETIME': timedelta(hours=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+    'REFRESH_TOKEN_LIFETIME': timedelta(hours=12),
 }
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
