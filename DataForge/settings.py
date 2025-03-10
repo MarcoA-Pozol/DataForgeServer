@@ -48,16 +48,32 @@ INSTALLED_APPS = [
     # Project's Apps
     'Application',
     'Authentication',
+    # API
+    'API',
 ]
 
 # API and JWT
 REST_FRAMEWORK = {
+    # Authentication
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    # Permissions
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
+    # Rate Limitting
+    'DEFAULT_THROTTLE_CLASSES': {
+        'rest_framework.throttling.AnonRateThrottle', # Limits unauthenticated users for API requests
+        'rest_framework.throttling.UserRateThrottle', # Limits authenticated users for API requests
+    },
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '5/minute', # Allow 5 requests per minute for unauthenticated users (Anonim)
+        'user': '50/minute', # Allow 50 requests per minute for authenticated users (User)
+    },
+    # Pagination
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10, # Number of items per page
 }
 
 SIMPLE_JWT = {

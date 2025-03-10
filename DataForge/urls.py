@@ -7,6 +7,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('authentication/', include('Authentication.urls')),
     path('', include('Application.urls')),
+    path('api/', include('API.urls')),
+    path('api-auth/', include('rest_framework.urls')),
 ]
 
 
