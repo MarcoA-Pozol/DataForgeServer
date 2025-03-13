@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from . datasets import COUNTRY_CHOICES, LANGUAGE_CHOICES
+from django.core.cache import cache
 
 
 class User(AbstractUser):
@@ -14,3 +15,11 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+    
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        cache.delete_pattern("cached_users_*")  # Clear user cache
+
+    def delete(self, *args, **kwargs):
+        super().delete(*args, **kwargs)
+        cache.delete_pattern("cached_users_*")  # Clear user cache
