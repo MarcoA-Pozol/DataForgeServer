@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # REST API Dependencies
     'rest_framework',
     'corsheaders',
+    'drf_yasg',
     # Project's Apps
     'Application',
     'Authentication',
@@ -196,7 +197,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # login Default Redirection URL
-LOGIN_URL = 'login'
+LOGIN_URL = None #'login'
 
 # Emails service settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
