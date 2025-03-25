@@ -1,0 +1,22 @@
+[] Done
+[] Uncompleted
+[] Error / Bug related
+[] Untracked
+
+
+# Authentication.
+[] Expose user´s data using an endpoint to let the client to connect (React).
+[] Expose an endpoint to check if an user exists on the database(use query parameters for url).
+[] Include a thread to fetch users data to set it available on cache memory with Redis for better performance.
+
+# Application: 
+[] User can store .csv, .txt, .pdf files on database.
+[] Design, build and migrate Files model (file_name, file_extension, file_size, file_author(FK)).
+[] Design and create the formulary for files storing.
+[] Integrate the view that saves user's uploaded files on database.
+[] User can upload the created(by DataForge tools) files on the database.
+[] User can load the created file directly.
+[] In a shared space, the user can share and vizualize files info from another team members.
+[] Files can be stored in cache during 2 hours if they are not saved. 
+[] Files can be shared throught email to the destination adress, or to user themself.
+[] User can Design spaces to work coolaboratevily.
