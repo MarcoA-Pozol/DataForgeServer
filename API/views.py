@@ -8,7 +8,8 @@ from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
 from django.core.cache import cache
 from Authentication.models import User
-from API.serializers import UserSerializer, UserUsernamesSerializer
+from API.serializers import UserSerializer, UserUsernamesSerializer, UserAuthenticationSerializer
+from abs import ABC, abstractmethod
 
 # User viewset
 class UserViewSet(viewsets.ModelViewSet):
@@ -56,4 +57,34 @@ class UserUsernamesAPIView(APIView):
         serializer = UserUsernamesSerializer(paginated_users, many=True)
         response = paginator.get_paginated_response(serializer.data)
 
+        return response
+
+# Users authentication endpoint.
+class I_AuthenticationAPIView(ABC):
+    def get(self, request):
+        pass
+        
+    def post(self, request):
+        pass
+        
+class UserAuthenticationDataAPIView(APIView, I_AuthenticationAPIView):
+    """
+    Expose user´s authentication process required data(username, password, email, etc).
+    """
+    def get(self, request):
+        """
+        Check if an user exists in cache or database.
+        """
+        query = request.GET.get('username', 'password') # Query parameters (?username=&password=)
+        cache_key = f'cached_users_{query}' # Cached key for the requested user
+        
+        # Check if requested user in cache
+        user = cache.get(cache_key)
+        if user is None:
+            logging.warning(f'Cache miss for key: {cache_key}')
+            response = serializer.data
+        else:
+            logging.info(f'Cahe key was obtained: {cache_key}')
+            response = user
+        
         return response

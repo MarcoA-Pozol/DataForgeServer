@@ -15,8 +15,8 @@
 # Authentication.
 [📌] Expose user´s data using an endpoint to let the client to connect (React).
 [📌] Expose an endpoint to check if an user exists on the database(use query parameters for url).
-[📌] Include a thread to fetch users data to set it available on cache memory with Redis for better performance.
-[📌]
+[📌] Include a thread to fetch users data to set it available on cache memory with Redis for better performance once the Authentication module starts. Neccesary to the process of checking if the user exists on database.
+[⏳] Include an endpoint with two methods (POST, GET) for user´s authentication process (Register, Login).
 [📌]
 [📌]
 [📌]

@@ -20,3 +20,12 @@ class UserUsernamesSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = User
 		fields = ['username', 'country', 'language']
+
+
+class UserAuthenticationSerializer(serializers.ModelSerializer):
+    """
+        Serializer for User model that exposes username and password(encrypted) in the response for the authentication process wether registering or login.
+    """
+    class Meta:
+        model = User
+        fields = ['username', 'password']
