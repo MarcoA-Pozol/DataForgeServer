@@ -75,11 +75,22 @@ class I_AuthenticationAPIView(ABC):
         
 class UserAuthenticationAPIView(APIView, I_AuthenticationAPIView):
     """
-    Expose user´s authentication process required data(username, password, email, etc).
+    API view to authenticate users and return an authentication token.
+
+    Methods:
+        post(request): Authenticates the user and returns a token if valid.
     """
+    
     def post(self, request):
         """
-        Authenticate user and return token if valid (JWT).
+        Authenticate user with the given username and passwordretrieving a token for access in a succesful case.
+
+        Args:
+            username (str): Username of the user.
+            password (str): Password of the user.
+
+        Returns:
+            dict: A dictionary containing authentication token if successful, an error message if not.
         """
         # Obtain user credentials by query parameters.
         username = request.data.get('username')
