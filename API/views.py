@@ -13,8 +13,7 @@ from abc import ABC, abstractmethod
 import logging
 
 # Logging settings
-logger = logging.getLoggerClass(__name__)
-logging.basicConfig(level=logger.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # User viewset
 class UserViewSet(viewsets.ModelViewSet):
@@ -86,12 +85,12 @@ class UserAuthenticationDataAPIView(APIView, I_AuthenticationAPIView):
         # Check if requested user in cache
         user = cache.get(cache_key)
         if user is None: # Obtaining user from database
-            logger.warning(f'Cache miss for key: {cache_key}')
+            logging.warning(f'Cache miss for key: {cache_key}')
             data = User.objects.get(username=request.GET.get('username'), password=request.GET.get('password'))
             serializer = UserAuthenticationSerializer(data, many=True)
             response = serializer.data
         else: # Obtaining user from cache
-            logger.info(f'Cahe key was obtained: {cache_key}')
+            logging.info(f'Cahe key was obtained: {cache_key}')
             response = user
         
         return response
