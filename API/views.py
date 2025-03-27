@@ -11,6 +11,8 @@ from Authentication.models import User
 from API.serializers import UserSerializer, UserUsernamesSerializer, UserAuthenticationSerializer
 from abc import ABC, abstractmethod
 import logging
+from rest_framework.authtoken.models import Token
+from rest_framework import status
 
 # Logging settings
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -75,22 +77,19 @@ class UserAuthenticationAPIView(APIView, I_AuthenticationAPIView):
     """
     Expose user´s authentication process required data(username, password, email, etc).
     """
-    def get(self, request):
+    def post(self, request):
         """
-        Check if an user exists in cache or database.
+        Authenticate user and return token if valid (JWT).
         """
-        query = request.GET.get('username', 'password') # Query parameters (?username=&password=)
-        cache_key = f'cached_users_{query}' # Cached key for the requested user
+        # Obtain user credentials by query parameters.
+        username = request.data.get('username')
+        password = request.data.get('password')
         
-        # Check if requested user in cache
-        user = cache.get(cache_key)
-        if user is None: # Obtaining user from database
-            logging.warning(f'Cache miss for key: {cache_key}')
-            data = User.objects.get(username=request.GET.get('username'), password=request.GET.get('password'))
-            serializer = UserAuthenticationSerializer(data, many=True)
-            response = serializer.data
-        else: # Obtaining user from cache
-            logging.info(f'Cahe key was obtained: {cache_key}')
-            response = user
-        
-        return response
+        # Get user
+        user = User.objects.get(username=username, password=password)
+
+        # Authenticate
+        if user:
+            token, _ = Token.objects.get_or_create(user=user)
+            return Response({'token': token.key, 'message': 'Authentication was succesful.'}, status=status.HTTP_200_OK)
+        return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
