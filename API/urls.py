@@ -30,7 +30,7 @@ router.register('users', UserViewSet, 'api-users')
 # Routes
 urlpatterns = [
     # Endpoints
-    path('', include(router.urls)),
+    path('users/', include(router.urls)),
     path('users-usernames/', UserUsernamesAPIView.as_view(), name='api-users-usernames'),
     path('users-authentication/', UserAuthenticationAPIView.as_view(), name='api-user-authentication'),
     # JWT Authentication Token Pair Generation and Refresh Token
