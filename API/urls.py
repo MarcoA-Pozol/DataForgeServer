@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from rest_framework.permissions import AllowAny
-from API.views import UserViewSet, UserUsernamesAPIView
+from API.views import UserViewSet, UserUsernamesAPIView, UserAuthenticationAPIView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -29,8 +29,10 @@ router.register('users', UserViewSet, 'api-users')
 
 # Routes
 urlpatterns = [
+    # Endpoints
     path('', include(router.urls)),
     path('users-usernames/', UserUsernamesAPIView.as_view(), name='api-users-usernames'),
+    path('users-authentication/', UserAuthenticationAPIView.as_view(), name='api-user-authentication'),
     # JWT Authentication Token Pair Generation and Refresh Token
     path('token/', TokenObtainPairView.as_view(), name='token-obtain-pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token-refresh'),

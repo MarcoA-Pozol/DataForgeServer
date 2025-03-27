@@ -71,7 +71,7 @@ class I_AuthenticationAPIView(ABC):
     def post(self, request):
         pass
         
-class UserAuthenticationDataAPIView(APIView, I_AuthenticationAPIView):
+class UserAuthenticationAPIView(APIView, I_AuthenticationAPIView):
     """
     Expose user´s authentication process required data(username, password, email, etc).
     """
