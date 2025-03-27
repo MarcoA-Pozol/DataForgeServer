@@ -86,12 +86,12 @@ class UserAuthenticationDataAPIView(APIView, I_AuthenticationAPIView):
         # Check if requested user in cache
         user = cache.get(cache_key)
         if user is None: # Obtaining user from database
-            logging.warning(f'Cache miss for key: {cache_key}')
+            logger.warning(f'Cache miss for key: {cache_key}')
             data = User.objects.get(username=request.GET.get('username'), password=request.GET.get('password'))
             serializer = UserAuthenticationSerializer(data, many=True)
             response = serializer.data
         else: # Obtaining user from cache
-            logging.info(f'Cahe key was obtained: {cache_key}')
+            logger.info(f'Cahe key was obtained: {cache_key}')
             response = user
         
         return response
