@@ -145,4 +145,11 @@ class UserRegisteringAPIView(APIView, I_UserRegisteringAPIView):
             return Response({'detail': 'This username and/or email adress is currently in use. Try with a different one please.'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Create user account if provided credentials not in use
-        user = User.objects.create(username=username, email=email, password=password, profile_picture=profile_picture, country=country, language=language)
+        try:
+            user = User.objects.create(username=username, email=email, password=password, profile_picture=profile_picture, country=country, language=language)
+            user.save()
+        except Exception as e:
+            return Response({'error': f'Failure during saving the user account: {e}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+        # If user was created generated a succesful response
+        return Response({"detail": 'User account was created.'}, status=status.HTTP_201_CREATED)
