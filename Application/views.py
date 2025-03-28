@@ -1,17 +1,17 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from . tasks import retrieve_current_user_data
 import threading
 
 def app_home(request):
     if request.user.is_authenticated:
         return render(request, 'app_home.html')
-    return redirect('authentication')
+    return None
 
 def import_export_data(request):
-    return render(request, 'import_export_data.html')
+    return None
 
 def data_visualization(request):
-    return render(request, 'app_data_visualization.html')
+    return None
 
 def user_data_view(request):
     auth_user = request.user
@@ -20,4 +20,4 @@ def user_data_view(request):
     if request.method == "GET":
         threading.Thread(target=retrieve_current_user_data, args=[auth_user,]).start()
 
-    return render(request, 'user_data.html')
+    return None

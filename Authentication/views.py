@@ -1,4 +1,3 @@
-from django.shortcuts import render, redirect
 from django.utils import translation
 from . forms import RegisterForm, LoginForm
 from django.contrib import auth, messages
@@ -10,7 +9,7 @@ def authentication(request):
         Displays the registration formulary or login formulry, receives the data and creates an user account or login with the provided credentials.
     """
     if request.user.is_authenticated:
-        return redirect('app-home')
+        return None
     user_language = request.session.get('django_language', None)
     if user_language:
         translation.activate(user_language)
@@ -35,9 +34,9 @@ def authentication(request):
             request.session['django_language'] = user.language
 
             if user.is_authenticated:
-                return redirect('app-home')
+                return None
             else:
-                return redirect('authentication')
+                return None
         if login_form.is_valid():
             username = login_form.cleaned_data['username']
             password = login_form.cleaned_data['password']
@@ -45,18 +44,18 @@ def authentication(request):
             user = auth.authenticate(request, username=username, password=password) # Check if provided credentials match with an existing user account.
             if user is not None:
                 auth.login(request, user)
-                return redirect('app-home')
+                return None
             else:
                 messages.error(request, 'Invalid username or password.')
     else:
         register_form = RegisterForm()
         login_form = LoginForm()
     context = {'register_form':register_form, 'login_form':login_form}
-    return render(request, 'formularies/authentication.html', context)
+    return None
         
 def logout(request):
     """
         Close current activaly user´s session.
     """
     auth.logout(request)
-    return redirect('authentication')
+    return None
