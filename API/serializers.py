@@ -29,3 +29,12 @@ class UserAuthenticationSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username', 'password']
+
+
+class UserRegisteringSerializer(serializers.ModelSerializer):
+	"""
+		Serializer for User registering process for new account creation.
+	"""
+	class Meta:
+		model = User
+		fields = ['username', 'email', 'password', 'country', 'profile_picture']
