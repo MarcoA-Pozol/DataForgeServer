@@ -11,9 +11,9 @@ schema_view = get_schema_view(
     openapi.Info(
         title="DataForge API",
         default_version="v1",
-        description="DataForge API documentation for users, contributors and more about.",
-        terms_of_service="https://www.example.com/terms/",
-        contact=openapi.Contact(email="admin@example.com"),
+        description="DataForge API documentation for users, contributors and much more about.",
+        terms_of_service="https://github.com/MarcoA-Pozol/DataForgeServer.git",
+        contact=openapi.Contact(email="marcoantoniopozolnarciso@gmail.com"),
         license=openapi.License(name="MIT License"),
     ),
     public=True,

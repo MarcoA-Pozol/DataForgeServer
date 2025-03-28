@@ -8,11 +8,12 @@ from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
 from django.core.cache import cache
 from Authentication.models import User
-from API.serializers import UserSerializer, UserUsernamesSerializer, UserAuthenticationSerializer
+from API.serializers import UserSerializer, UserUsernamesSerializer
 from abc import ABC, abstractmethod
 import logging
 from rest_framework.authtoken.models import Token
 from rest_framework import status
+from Authentication.datasets import COUNTRY_TO_LANGUAGE, COUNTRY_CHOICES, LANGUAGE_CHOICES
 
 # Logging settings
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -67,9 +68,12 @@ class UserUsernamesAPIView(APIView):
 
 # Users authentication endpoint.
 class I_AuthenticationAPIView(ABC):
-    def get(self, request):
+    @abstractmethod
+    def post(self, request):
         pass
-        
+
+class I_UserRegisteringAPIView(ABC):
+    @abstractmethod
     def post(self, request):
         pass
         
@@ -83,7 +87,7 @@ class UserAuthenticationAPIView(APIView, I_AuthenticationAPIView):
     
     def post(self, request):
         """
-        Authenticate user with the given username and passwordretrieving a token for access in a succesful case.
+        Authenticate user with the given username and password retrieving a token for access in a succesful case.
 
         Args:
             username (str): Username of the user.
@@ -104,3 +108,41 @@ class UserAuthenticationAPIView(APIView, I_AuthenticationAPIView):
             token, _ = Token.objects.get_or_create(user=user)
             return Response({'token': token.key, 'message': 'Authentication was succesful.'}, status=status.HTTP_200_OK)
         return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+    
+class UserRegisteringAPIView(APIView, I_UserRegisteringAPIView):
+    def post(self, request):
+        """
+        Register and create and account for an user with the given username, password, email, profile_picture and country.
+        Retrieves a JWT for authentication in a successful case. 
+
+        Args:
+            username (str): Username for the user account.
+            email (str): Email for the user account.
+            password (str): Password for the user account.
+            country (str): Country of the person behind the new account creation.
+            profile_picture (str): Profile picture of the user account.
+
+        Returns:
+            dict: A dictionary containing authentication token if successful, an error message if not.
+        """
+        # Obtaining data from query parameters
+        username = request.data.get('username')
+        email = request.data.get('email')
+        password = request.data.get('password')
+        profile_picture = request.data.get('profile_picture')
+        country = request.data.get('country')
+        language = COUNTRY_TO_LANGUAGE.get(country, 'en')
+
+        # Validation of data
+        if country not in COUNTRY_CHOICES:
+            return Response({'error': 'Invalid country was provided. Try with a valid country value.'}, status=status.HTTP_400_BAD_REQUEST)
+        if language not in LANGUAGE_CHOICES:
+            return Response({'error': 'The provided country did not matched with a correct language value, but this might be a problem of the server. Whereas, you can try with a different and valid country.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Check if provided credentials are in use, then return a 400_BAD_REQUEST statement
+        user = User.objects.get(username=username, email=email).first()
+        if user:
+            return Response({'detail': 'This username and/or email adress is currently in use. Try with a different one please.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Create user account if provided credentials not in use
+        user = User.objects.create(username=username, email=email, password=password, profile_picture=profile_picture, country=country, language=language)
