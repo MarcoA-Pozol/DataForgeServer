@@ -10,3 +10,8 @@ class UserFiles(models.Model):
     filetype = models.CharField(max_length=20, choices=FILE_EXTENSION_CHOICES, null=False) # Extensions like XLS, XLSX, JSON, CSV, SQL, etc. 
     filesize = models.IntegerField(null=False) # Add a validation layer for the filesize to allow only files under a determined size or weigth depending the tier the user haves
     
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs) # Add a validation layer for data in formulary to ensure all fields are being filled
+        
+    def __str__(self):
+        return f'{self.user.username} - {self.filename}'
