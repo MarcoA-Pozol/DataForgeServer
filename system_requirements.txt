@@ -32,8 +32,8 @@
 [📌] Files can be stored in cache during 2 hours if they are not saved. 
 [📌] Files can be shared throught email to the destination adress, or to user themself.
 [📌] User can Design spaces to work coolaboratevily.
-[📌]
-[📌]
+[⏳] User can store files in the app database to be used latter.
+[📌] The number of files's total size must be controlled per account depending of tier the user have (free, professional)
 [📌]
 [📌]
 [📌]
