@@ -31,7 +31,7 @@ router.register('users', UserViewSet, 'api-users')
 urlpatterns = [
     path('', include(router.urls)),
     path('users-usernames/', UserUsernamesAPIView.as_view(), name='api-users-usernames'),
-    # JWT Authentication Token Pair Generation and Refresh Token
+    # JWT Token Pair Generation and Refresh Token
     path('token/', TokenObtainPairView.as_view(), name='token-obtain-pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token-refresh'),
     # API documentation with swagger and redoc
