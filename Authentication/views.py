@@ -10,6 +10,8 @@ from . models import User
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.tokens import RefreshToken
 
 class RegisterUserAPIView(APIView):
     """
@@ -53,3 +55,15 @@ class RegisterUserAPIView(APIView):
             return Response({'message':f'User account was successfully created: {username}'}, status=status.HTTP_201_CREATED)
         except Exception as e:
             return Response({'error':f'An error ocurred during creating a new user account: {e}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+class LogoutAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        try:
+            refresh_token = request.data["refresh"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()  # Blacklist the token (Invalidates refresh token preventing future logins with it for security)
+            return Response({"message": "Logged out successfully"}, status=200)
+        except Exception as e:
+            return Response({"error": "Invalid token"}, status=400)
