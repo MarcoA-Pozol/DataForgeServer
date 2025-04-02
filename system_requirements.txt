@@ -17,7 +17,7 @@
 [📌] Expose an endpoint to check if an user exists on the database(use query parameters for url).
 [📌] Include a thread to fetch users data to set it available on cache memory with Redis for better performance once the Authentication module starts. Neccesary to the process of checking if the user exists on database.
 [⏳] Include an endpoint with two methods (POST, GET) for user´s authentication process (Register, Login).
-[📌]
+[📌] Include and endpoint that destroys the current session JWT and logout the user retrieving a 200 status code to the client.
 [📌]
 [📌]
 
@@ -32,8 +32,8 @@
 [📌] Files can be stored in cache during 2 hours if they are not saved. 
 [📌] Files can be shared throught email to the destination adress, or to user themself.
 [📌] User can Design spaces to work coolaboratevily.
-[📌]
-[📌]
-[📌]
+[⏳] User can store files in the app database to be used latter.
+[📌] The number of files's total size must be controlled per account depending of tier the user have (free, professional)
+[📌] Expose an endpoint to manage the selected language change and update it in user's data.
 [📌]
 [📌]

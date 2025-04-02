@@ -93,8 +93,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'Authentication.middlewares.UserLanguageMiddleware',
-    'Application.middlewares.UploadDataValidationMiddleware',
 ]
 
 ROOT_URLCONF = 'DataForge.urls'
