@@ -19,19 +19,19 @@ class RegisterUserAPIView(APIView):
     """
     def post(self, request):
         """
-        Create a new account receiving data from client consumer throught query parameters for body.
-        Send an email of welcoming to the new user to their email adress if account is created successfully (Using a Thread).
-        This does not require JWT authorization.
-        
-        Args:
-        - username(str): Username for the account.
-        - email(str): Email for the account.
-        - password(str): Password for the account.
-        - country(str): Country the account´s user stems from.
-        - profile_picture(str): Profile picture of the user.
-        
-        Returns:
-        - response(JSON): Response with detail and status code in JSON format.
+            Create a new account receiving data from client consumer throught query parameters for body.
+            Send an email of welcoming to the new user to their email adress if account is created successfully (Using a Thread).
+            This does not require JWT authorization.
+            
+            Args:
+                - username(str): Username for the account.
+                - email(str): Email for the account.
+                - password(str): Password for the account.
+                - country(str): Country the account´s user stems from.
+                - profile_picture(str): Profile picture of the user.
+            
+            Returns:
+                - response(JSON): Response with detail and status code in JSON format.
         """
         # Load User model
         model = User
@@ -57,13 +57,25 @@ class RegisterUserAPIView(APIView):
             return Response({'error':f'An error ocurred during creating a new user account: {e}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
 class LogoutAPIView(APIView):
+    """
+        Close user's session and destroy current JWT for that session.
+    """
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
+        """
+            Destroy current user session token for security, including both normal and refresh token.
+        
+        Args:
+            - None
+        
+        Returns:
+            - response(JSON): Response with detail and status code in JSON format with 205 reset content status code for successfully session finalization.
+        """
         try:
             refresh_token = request.data["refresh"]
             token = RefreshToken(refresh_token)
             token.blacklist()  # Blacklist the token (Invalidates refresh token preventing future logins with it for security)
-            return Response({"message": "Logged out successfully"}, status=200)
+            return Response({"message": "Logged out successfully"}, status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
             return Response({"error": "Invalid token"}, status=400)
