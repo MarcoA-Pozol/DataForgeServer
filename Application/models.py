@@ -7,7 +7,7 @@ ALLOWED_FILES_TOTAL_SIZE = [(1000, 1000), (100000, 100000)] # MB (1G for basic t
 ALLOWED_DATABASE_QUERIES_PER_DAY = [(50, 50), (500, 500)] # Queries to the database
 ALLOWED_API_REQUESTS_PER_DAY = [(20, 20), (300, 300)]
 
-class UserFiles(models.Model):
+class UserFile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_files') # User is the foreign key the file belongs to
     file = models.FileField(upload_to='userfiles/uploads/%Y/%m/%d/') # Store user files for each day for better control
     filename = models.CharField(max_length=255, null=False, unique=True) # This should manage in the data insertion layer to add the username to the filename first but showing it without the username in the name in the UI
