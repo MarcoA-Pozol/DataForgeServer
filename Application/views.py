@@ -3,9 +3,7 @@ from . tasks import retrieve_current_user_data
 import threading
 
 def app_home(request):
-    if request.user.is_authenticated:
-        return render(request, 'app_home.html')
-    return None
+    return "Hello Home from Django!"
 
 def import_export_data(request):
     return None

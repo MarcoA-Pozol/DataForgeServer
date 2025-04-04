@@ -32,14 +32,10 @@ urlpatterns = [
     # Endpoints
     path('users/', include(router.urls)),
     path('users-usernames/', UserUsernamesAPIView.as_view(), name='api-users-usernames'),
-<<<<<<< HEAD
     # Authentication
     path('user-registering/', UserRegisteringAPIView.as_view(), name='api-user-registering'),
     path('users-authentication/', UserAuthenticationAPIView.as_view(), name='api-user-authentication'),
-    # JWT Authentication Token Pair Generation and Refresh Token
-=======
     # JWT Token Pair Generation and Refresh Token
->>>>>>> 229fb7cdcad77f191b3b7b45a710077f1b748c68
     path('token/', TokenObtainPairView.as_view(), name='token-obtain-pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token-refresh'),
     # API documentation with swagger and redoc

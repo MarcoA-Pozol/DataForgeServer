@@ -1,11 +1,11 @@
 from django.db import models
 from Authentication.models import User
 
-FILE_EXTENSION_CHOICES = ['csv', 'xls', 'xlsx', 'txt', 'pdf', 'json']
-TIERS = ['Basic', 'Professional'] 
-ALLOWED_FILES_TOTAL_SIZE = [1000, 100000] # MB (1G for basic tier, 100G for professional tier)
-ALLOWED_DATABASE_QUERIES_PER_DAY = [50, 500] # Queries to the database
-ALLOWED_API_REQUESTS_PER_DAY = [20, 300]
+FILE_EXTENSION_CHOICES = [('csv', 'csv'), ('xls', 'xls'), ('xlsx','xlsx'), ('txt', 'txt'), ('pdf', 'pdf'), ('json', 'json')]
+TIERS = [('Basic', 'Basic'), ('Professional', 'Professional')] 
+ALLOWED_FILES_TOTAL_SIZE = [(1000, 1000), (100000, 100000)] # MB (1G for basic tier, 100G for professional tier)
+ALLOWED_DATABASE_QUERIES_PER_DAY = [(50, 50), (500, 500)] # Queries to the database
+ALLOWED_API_REQUESTS_PER_DAY = [(20, 20), (300, 300)]
 
 class UserFiles(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_files') # User is the foreign key the file belongs to
